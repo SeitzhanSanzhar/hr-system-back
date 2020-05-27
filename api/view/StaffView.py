@@ -3,6 +3,9 @@ from api.models import StaffToPosition, Staff, Position
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+def get_full_path(file_name):
+    pass
+
 def get_all_stuff(request):
     all_person = Staff.objects.all()
     json_response = {'staff':[x.to_short_json() for x in all_person]}
