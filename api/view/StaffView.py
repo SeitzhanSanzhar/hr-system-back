@@ -17,10 +17,22 @@ def search_staff(request):
     print(search_value)
     staff_set = Staff.objects.filter(name__startswith=search_value)
     json_response = {'staff': [x.to_short_json() for x in staff_set]}
+    print (json_response)
     return JsonResponse(json_response)
 
+<<<<<<< HEAD
 def get_staff(request, pk):
     person = Staff.objects.get(id=pk)
     print (person.to_short_json())
     return JsonResponse(person.to_short_json())
+=======
+def get_stuff(request):
+    print ("OK")
+    staff_id = request.GET.get('staff_id')
+    all_person = Staff.objects.get(id = staff_id)
+    json_response = all_person.to_json()
+    print (json_response)
+    # print (JsonResponse(json_response))
+    return JsonResponse(json_response)
+>>>>>>> f23188d693b324ca782761b536882643ef99e96d
 
