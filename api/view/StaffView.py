@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from api.models import StaffToPosition, Staff, Position
+from django.views.decorators.csrf import csrf_exempt
 import json
-
 
 def get_all_stuff(request):
     all_person = Staff.objects.all()
@@ -10,9 +10,10 @@ def get_all_stuff(request):
     # print (JsonResponse(json_response))
     return JsonResponse(json_response)
 
+@csrf_exempt
 def search_staff(request):
-    in_json  = json.loads(request.body)
-    search_value = in_json.get('search_value', '')
+    #FIXME: pls resolve this problem with request type's :(
+    search_value = request.GET.get('search_value')
     print(search_value)
     staff_set = Staff.objects.filter(name__startswith=search_value)
     json_response = {'staff': [x.to_short_json() for x in staff_set]}
