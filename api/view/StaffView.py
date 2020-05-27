@@ -19,10 +19,8 @@ def search_staff(request):
     json_response = {'staff': [x.to_short_json() for x in staff_set]}
     return JsonResponse(json_response)
 
-def get_stuff(request):
-    all_person = Staff.objects.all()
-    json_response = {'staff':[x.to_short_json() for x in all_person]}
-    print (json_response)
-    # print (JsonResponse(json_response))
-    return JsonResponse(json_response)
+def get_staff(request, pk):
+    person = Staff.objects.get(id=pk)
+    print (person.to_short_json())
+    return JsonResponse(person.to_short_json())
 
