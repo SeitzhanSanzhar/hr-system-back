@@ -8,7 +8,7 @@ class Staff(models.Model):
     lastname = models.CharField(max_length=250)
     phone_number = models.CharField(max_length=250)
     email = models.CharField(max_length=250)
-
+    profile_picture = models.ImageField(null=True)
     @property
     def positions(self):
         position_history = StaffToPosition.objects.filter(staff=self)
@@ -16,12 +16,12 @@ class Staff(models.Model):
         return json_response
 
     def to_json(self):
-        res = model_to_dict(self)
+        res = model_to_dict(self, exclude=("profile_picture"))
         res['positions'] = self.positions
         return res
 
     def to_short_json(self):
-        res = model_to_dict(self, exclude=[self.phone_number, self.email])
+        res = model_to_dict(self, exclude=("phone_number", "email", "profile_picture"))
         return res
 
     def __str__(self):
