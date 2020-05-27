@@ -23,6 +23,11 @@ def search_staff(request):
     print (json_response)
     return JsonResponse(json_response)
 
+def get_staff(request, pk):
+    person = Staff.objects.get(id=pk)
+    print (person.to_short_json())
+    return JsonResponse(person.to_short_json())
+    
 def get_stuff(request):
     print ("OK")
     staff_id = request.GET.get('staff_id')
