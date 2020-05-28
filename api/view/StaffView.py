@@ -3,6 +3,9 @@ from api.models import StaffToPosition, Staff, Position
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+def get_full_path(file_name):
+    pass
+
 def get_all_stuff(request):
     all_person = Staff.objects.all()
     json_response = {'staff':[x.to_short_json() for x in all_person]}
@@ -20,12 +23,20 @@ def search_staff(request):
     print (json_response)
     return JsonResponse(json_response)
 
+<<<<<<< HEAD
 
 def get_staff(request, pk):
     person = Staff.objects.get(id=pk)
     print (person.to_json())
     return JsonResponse(person.to_json())
 
+=======
+def get_staff(request, pk):
+    person = Staff.objects.get(id=pk)
+    print (person.to_short_json())
+    return JsonResponse(person.to_short_json())
+    
+>>>>>>> fa4b105804610483661dd956d431627ba20e619e
 def get_stuff(request):
     print ("OK")
     staff_id = request.GET.get('staff_id')

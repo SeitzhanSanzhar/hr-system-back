@@ -18,10 +18,12 @@ class Staff(models.Model):
     def to_json(self):
         res = model_to_dict(self, exclude=("profile_picture"))
         res['positions'] = self.positions
+        res['profile_picture'] = self.profile_picture.url
         return res
 
     def to_short_json(self):
         res = model_to_dict(self, exclude=("phone_number", "email", "profile_picture"))
+        res['profile_picture'] = self.profile_picture.url
         return res
 
     def __str__(self):
