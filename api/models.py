@@ -9,6 +9,8 @@ class Staff(models.Model):
     phone_number = models.CharField(max_length=250)
     email = models.CharField(max_length=250)
     profile_picture = models.ImageField(null=True)
+    age = models.IntegerField(null=True)
+
     @property
     def positions(self):
         position_history = StaffToPosition.objects.filter(staff=self)
@@ -45,7 +47,7 @@ class Position(models.Model):
 class StaffToPosition(models.Model):
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
-    start_date = models.DateTimeField(auto_now=True)
+    start_date = models.DateTimeField(null=True)
     end_date = models.DateTimeField(null=True)
 
     def to_json(self):
