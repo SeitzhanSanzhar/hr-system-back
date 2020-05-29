@@ -52,6 +52,7 @@ class StaffToPosition(models.Model):
 
     def to_json(self):
         res = model_to_dict(self)
+        res['position'] = self.position.to_json()
         return res
 
     def __str__(self):
